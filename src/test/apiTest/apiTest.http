@@ -1,0 +1,91 @@
+###
+//1. 채팅방 생성
+POST http://localhost:8080/chat/createroom
+Content-Type: application/json
+
+{
+  "roomName" : "테스트방"
+}
+
+###결과
+#{
+#  "modelAndView": {
+#    "view": null,
+#    "model": {
+#      "roomId": "4768"
+#    },
+#    "status": null,
+#    "empty": false,
+#    "viewName": "jsonView",
+#    "reference": true,
+#    "modelMap": {
+#      "roomId": "4768"
+#    }
+#  },
+#  "roomId": "4768"
+#}
+#Response file saved.
+#> 2023-10-06T212140.200.json
+#
+#Response code: 200; Time: 562ms (562 ms); Content length: 168 bytes (168 B)
+
+###
+//2. 채팅방 내 채팅목록 조회
+POST http://localhost:8080/chat/chatlist
+Content-Type: application/json
+
+{
+  "roomId": "8072"
+}
+###결과
+#{
+#  "modelAndView": {
+#    "view": null,
+#    "model": {
+#      "list": null
+#    },
+#    "status": null,
+#    "empty": false,
+#    "viewName": "jsonView",
+#    "reference": true,
+#    "modelMap": {
+#      "list": null
+#    }
+#  },
+#  "list": null
+#}
+#Response file saved.
+#> 2023-10-07T104311.200.json
+#
+#Response code: 200; Time: 5ms (5 ms); Content length: 156 bytes (156 B)
+
+
+###
+//3. 채팅에 참여한 유저 리스트 반환
+POST http://localhost:8080/chat/userlist
+Content-Type: application/json
+
+{
+  "roomId": "8072"
+}
+###결과
+#{
+#  "userList": null,
+#  "modelAndView": {
+#    "view": null,
+#    "model": {
+#      "userList": null
+#    },
+#    "status": null,
+#    "empty": false,
+#    "viewName": "jsonView",
+#    "reference": true,
+#    "modelMap": {
+#      "userList": null
+#    }
+#  }
+#}
+#Response file saved.
+#> 2023-10-07T104244.200.json
+#
+#Response code: 200; Time: 6ms (6 ms); Content length: 168 bytes (168 B)
