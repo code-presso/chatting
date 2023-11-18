@@ -4,6 +4,7 @@
 
 ## websocket 
 HTML5 표준 기술로, HTTP 환경에서 클라이언트와 서버 사이에 하나의 TCP 연결을 통해 실시간으로 전이중 통신을 가능하게 하는 프로토콜이다. 여기서 전이중 통신이란, 일방적인 송신 또는 수신만이 가능한 단방향 통신과 달리 가정에서의 전화와 같이 양방향으로 송신과 수신이 가능한 것을 말한다. 양방향 통신이 아닌 단방향 통신의 예로는 텔레비전 방송, 라디오를 들 수 있는데, 데이터를 수신만 할 수 있고, TV나 라디오를 통해 데이터를 보낼 수 없다.
+![websocket.png](websocket.png)
 
 ### 통신 방식 
 웹 소켓은 전이중 통신이므로, 연속적인 데이터 전송의 신뢰성을 보장하기 위해 Handshake 과정을 진행한다.
@@ -118,6 +119,13 @@ WebSocket 기반으로 각 Connection(연결)마다 WebSocketHandler를 구현�
 즉, 메세지는 STOMP의 "destination" 헤더를 기반으로 @Controller 객체의 @MethodMapping 메서드로 라우팅 된다.
 STOMP의 "destination" 및 Message Type을 기반으로 메세지를 보호하기 위해 Spring Security를 사용할 수 있다.
 
+### 서비스 구조
+![image.png](image.png)
+- 서버가 down되거나 재시작을 하게되면 Message Broker(메시지 큐)에 있는 데이터들은 유실될 수 있다.
+- 다수의 서버일 경우 서버간 채팅방을 공유할 수 없게 되면서 다른 서버간에 있는 사용자와의 채팅이 불가능 해진다.
+- Redis는 STOMP 프로토콜을 지원하지 않지만, Redis가 제공하는 Pub/Sub 기능을 통해 메시지 브로커로 사용할 수 있다. 
+
+
 ### 예제
 
 ```java
@@ -180,15 +188,12 @@ Client에서는 prefix를 붙여 `/pub/chat/message`로 발행 요청을 하면 
 
 Client에서는 해당 주소를 SUBSCRIBE하고 있다가 메세지가 전달되면 화면에 출력한다. 
 
-
-
-
-## 구동법
+### 구동법
 1. IntelliJ Run
 2. `/chat/createroom` 으로 채팅방 생성 
 3. localhost:8080 으로 접속
 4. 2번에서 생성한 chatRoom Id 로 접속
 
-
-
-## 구조
+## ref
+- https://dgempiuc.medium.com/spring-websocket-and-redis-pub-sub-a02af0dabddb
+- https://jhamukul007.medium.com/spring-boot-scaling-with-redis-pub-sub-788930a7632e
